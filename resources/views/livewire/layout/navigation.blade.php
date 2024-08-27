@@ -23,15 +23,23 @@ new class extends Component
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" wire:navigate>
+                    <a href="{{ route('libros') }}" wire:navigate>
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('libros')" :active="request()->routeIs('libros')" wire:navigate>
+                        {{ __('Libros') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('categorias')" :active="request()->routeIs('categorias')" wire:navigate>
+                        {{ __('Categorias') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('autores')" :active="request()->routeIs('autores')" wire:navigate>
+                        {{ __('Autores') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -81,8 +89,8 @@ new class extends Component
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('libros')" :active="request()->routeIs('libros')" wire:navigate>
+                {{ __('Libros') }}
             </x-responsive-nav-link>
         </div>
 
@@ -108,3 +116,12 @@ new class extends Component
         </div>
     </div>
 </nav>
+
+@livewireScripts
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<x-livewire-alert::scripts />
+
+<script src="https://kit.fontawesome.com/cd197f289d.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

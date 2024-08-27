@@ -46,7 +46,7 @@ new #[Layout('layouts.guest')] class extends Component
 
         Auth::login($user);
 
-        $this->redirect(route('dashboard', absolute: false), navigate: true);
+        $this->redirect(route('libros', absolute: false), navigate: true);
     }
 }; ?>
 
@@ -83,7 +83,12 @@ new #[Layout('layouts.guest')] class extends Component
         <!-- Tipo de usuario -->
         <div class="mt-4">
             <x-input-label for="tipo_usuario" :value="__('Tipo de usuario')" />
-            <x-select wire:model="tipo_usuario" id="tipo_usuario" class="block mt-1 w-full" type="text" name="tipo_usuario"  autocomplete="tipo_usuario" />
+            <x-select wire:model="tipo_usuario" id="tipo_usuario" class="block mt-1 w-full" type="text" name="tipo_usuario"  autocomplete="tipo_usuario">
+                <option value="">Seleccione un tipo de usuario</option> <!-- Opción por defecto -->
+                <option value="estudiante">Estudiante</option>
+                <option value="profesor">Profesor</option>
+                <option value="visitante">Visitante</option>
+            </x-select>
             <x-input-error :messages="$errors->get('tipo_usuario')" class="mt-2" />
         </div>
 
