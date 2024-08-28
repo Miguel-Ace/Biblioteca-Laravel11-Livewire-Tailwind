@@ -15,14 +15,14 @@
                 @foreach ($categories as $categorie)
                     <tr>
                         <td class="border text-center p-2">{{$categorie->nombre}}</td>
-                        <td class="border text-center p-2">
-                            <button wire:click='' class="bg-blue-700 px-1 border rounded hover:bg-blue-800 transition-all">
+                        <td class="border text-center p-2 flex justify-center gap-2">
+                            <button wire:click='open_modal_editar({{$categorie}})' class="bg-blue-700 px-1 border rounded hover:bg-blue-800 transition-all">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
-                            <button wire:click='' class="bg-purple-700 px-1 border rounded hover:bg-purple-800 transition-all">
+                            {{-- <button wire:click='' class="bg-purple-700 px-1 mx-1 border rounded hover:bg-purple-800 transition-all">
                                 <i class="fa-solid fa-share"></i>
-                            </button>
-                            <button wire:click='' wire:confirm='¿Seguro de borrarlo?' class="bg-red-600 px-1 border rounded hover:bg-red-800 transition-all">
+                            </button> --}}
+                            <button wire:click='delete_categorie({{$categorie->id}})' wire:confirm='¿Seguro de borrarlo?' class="bg-red-600 px-1 border rounded hover:bg-red-800 transition-all">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
@@ -40,7 +40,11 @@
 
     @if ($modal)
         <x-modal-form>
-            <h2 class="text-center text-2xl">Crear categoria</h2>
+            @if ($isOpenModaCreate)
+                <h2 class="text-center text-2xl">Crear categoria</h2>
+            @else
+                <h2 class="text-center text-2xl">Editar categoria</h2>
+            @endif
 
             <div class="flex flex-col gap-1 mb-3">
                 <x-input-label for="nombre" :value="__('Nombre')" />
@@ -49,7 +53,11 @@
             </div>
 
             <div class="my-3 flex gap-1">
-                <x-save-button wire:click.prevent='create_categorie'>Guardar</x-save-button>
+                @if ($isOpenModaCreate)  
+                    <x-save-button wire:click.prevent='create_categorie'>Guardar</x-save-button>
+                @else
+                    <x-save-button wire:click.prevent='update_categorie'>Actualizar</x-save-button>
+                @endif
                 <x-cancelar-button wire:click.prevent='close_modal'>Cancelar</x-save-button>
             </div>
         </x-modal-form>
